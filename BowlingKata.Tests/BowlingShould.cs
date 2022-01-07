@@ -49,7 +49,16 @@ namespace BowlingKata.Tests
             
             Assert.Equal(3,game.Score());
 
-        } 
-        
+        }
+
+        [Fact]
+        public void NotKnockMoreThanTenPinsWithinASingleFrame()
+        {
+            Game game = new();
+            
+            game.Roll(9);
+            
+            Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(9));
+        }
     }
 }

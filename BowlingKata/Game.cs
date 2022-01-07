@@ -24,29 +24,56 @@ namespace BowlingKata
             if (pins < 0 || pins + _scorePerFrame[_currentFrame] > 10)
                 throw new ArgumentOutOfRangeException(nameof(pins));
 
-            _scorePerFrame[_currentFrame] += pins;
+            AddScoreToCurrentFrame(pins);
 
-            if (_isSecondRoll)
+            if (IsFirstRoll && pins == 10)
             {
-                if (_wasStrike)
-                    _bonusPerFrame[_currentFrame - 1] += pins;
-                
-                _isSecondRoll = false;   
-                _wasStrike = false;
-                _wasSpare = _scorePerFrame[_currentFrame] == 10;
-                _currentFrame++;
+                Strike();
             }
-            else if (pins == 10)
+            else if (IsFirstRoll)
             {
-                _currentFrame++;
-                _wasStrike = true;
+                FirstRoll(pins);
             }
             else
             {
-                _isSecondRoll = true;
-                if (_wasSpare || _wasStrike)
-                    _bonusPerFrame[_currentFrame - 1] += pins;
+                SecondRoll(pins);
             }
         }
+
+        private void AddScoreToCurrentFrame(int pins)
+        {
+            _scorePerFrame[_currentFrame] += pins;
+        }
+
+        private void SecondRoll(int pins)
+        {
+            if (_wasStrike)
+                AddBonusToPreviousFrame(pins);
+
+            _isSecondRoll = false;
+            _wasStrike = false;
+            _wasSpare = _scorePerFrame[_currentFrame] == 10;
+            _currentFrame++;
+        }
+
+        private void FirstRoll(int pins)
+        {
+            _isSecondRoll = true;
+            if (_wasSpare || _wasStrike)
+                AddBonusToPreviousFrame(pins);
+        }
+
+        private void AddBonusToPreviousFrame(int pins)
+        {
+            _bonusPerFrame[_currentFrame - 1] += pins;
+        }
+
+        private void Strike()
+        {
+            _currentFrame++;
+            _wasStrike = true;
+        }
+
+        private bool IsFirstRoll => !_isSecondRoll;
     }
 }

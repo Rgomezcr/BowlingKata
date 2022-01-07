@@ -4,12 +4,11 @@
     {
         public int Score()
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
 
         public void Roll(int pins)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

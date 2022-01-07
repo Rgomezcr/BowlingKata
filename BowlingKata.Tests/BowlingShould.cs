@@ -14,5 +14,15 @@ namespace BowlingKata.Tests
             
             Assert.Equal(0,game.Score());
         }
+
+        [Fact]
+        public void ScoreAsManyPointsAsPinsAreKnockedDown()
+        {
+            Game game = new();
+
+            game.Roll(1);
+            
+            Assert.Equal(1,game.Score());
+        } 
     }
 }

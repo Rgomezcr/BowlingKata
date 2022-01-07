@@ -7,21 +7,21 @@ namespace BowlingKata
     {
         private const int FramesPerGame = 10;
 
-        private int[] _pins = new int[FramesPerGame];
-        private int _currentFrame = 0;
-        private bool _isSecondRoll = false;
+        private readonly int[] _scorePerFrame = new int[FramesPerGame];
+        private int _currentFrame;
+        private bool _isSecondRoll;
 
         public int Score()
         {
-            return _pins.Sum();
+            return _scorePerFrame.Sum();
         }
 
         public void Roll(int pins)
         {
-            if (pins < 0 || pins + _pins[_currentFrame] > 10)
+            if (pins < 0 || pins + _scorePerFrame[_currentFrame] > 10)
                 throw new ArgumentOutOfRangeException(nameof(pins));
 
-            _pins[_currentFrame] += pins;
+            _scorePerFrame[_currentFrame] += pins;
 
             if (_isSecondRoll)
             {

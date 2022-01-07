@@ -84,5 +84,18 @@ namespace BowlingKata.Tests
             
             Assert.Equal(20, game.Score());
         }
+        
+        [Fact]
+        public void AddStrikeBonusAsValueOfNextTwoRoll()
+        {
+            Game game = new();
+            
+            game.Roll(10);
+            game.Roll(4);
+            game.Roll(5);
+            
+            Assert.Equal(28, game.Score());
+        }
+
     }
 }

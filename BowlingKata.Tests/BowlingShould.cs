@@ -96,6 +96,20 @@ namespace BowlingKata.Tests
             
             Assert.Equal(28, game.Score());
         }
+        
+        [Fact]
+        public void AddBonusForSeveralStrikesInARow()
+        {
+            Game game = new();
+            
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(0);
+            game.Roll(0);
+            
+            Assert.Equal(60, game.Score());
+        }
 
     }
 }

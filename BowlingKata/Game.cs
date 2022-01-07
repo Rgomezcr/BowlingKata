@@ -1,4 +1,6 @@
-﻿namespace BowlingKata
+﻿using System;
+
+namespace BowlingKata
 {
     public class Game
     {
@@ -12,6 +14,9 @@
 
         public void Roll(int pins)
         {
+            if (pins < 0)
+                throw new ArgumentOutOfRangeException(nameof(pins));
+            
             _pins = pins;
         }
     }

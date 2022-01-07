@@ -38,5 +38,18 @@ namespace BowlingKata.Tests
             Game game = new();
             Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(11));
         }
+
+        [Fact]
+        public void AddScoresFromMultipleRolls()
+        {
+            Game game = new();
+
+            game.Roll(1);
+            game.Roll(2);
+            
+            Assert.Equal(3,game.Score());
+
+        } 
+        
     }
 }

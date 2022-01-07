@@ -98,7 +98,7 @@ namespace BowlingKata.Tests
         }
         
         [Fact]
-        public void AddBonusForSeveralStrikesInARow()
+        public void AddBonusForThreeStrikesInARow()
         {
             Game game = new();
             
@@ -111,5 +111,19 @@ namespace BowlingKata.Tests
             Assert.Equal(60, game.Score());
         }
 
+        [Fact]
+        public void AddBonusForFourStrikesInARow()
+        {
+            Game game = new();
+            
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(0);
+            game.Roll(0);
+            
+            Assert.Equal(90, game.Score());
+        }
     }
 }

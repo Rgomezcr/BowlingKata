@@ -27,6 +27,7 @@ namespace BowlingKata
             AddScoreToCurrentFrame(pins);
             if (_wasSpare || _wasStrike)
                 AddBonus(pins);
+            
             if (IsFirstRoll && pins == 10)
             {
                 Strike(pins);
@@ -66,7 +67,8 @@ namespace BowlingKata
 
         private void Strike(int pins)
         {
-            
+            if (_currentFrame >= 2 && _scorePerFrame[_currentFrame - 2] == 10)
+                AddBonus(pins);
             _currentFrame++;
             _wasStrike = true;
         }

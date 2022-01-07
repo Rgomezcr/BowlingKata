@@ -23,6 +23,13 @@ namespace BowlingKata.Tests
             game.Roll(1);
             
             Assert.Equal(1,game.Score());
+        }
+
+        [Fact]
+        public void FailIfAttemptingToScoreNegativePins()
+        {
+            Game game = new();
+            Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(-1));
         } 
     }
 }

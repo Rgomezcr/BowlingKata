@@ -36,19 +36,16 @@ namespace BowlingKata
                 _wasSpare = _scorePerFrame[_currentFrame] == 10;
                 _currentFrame++;
             }
+            else if (pins == 10)
+            {
+                _currentFrame++;
+                _wasStrike = true;
+            }
             else
             {
-                if (pins == 10)
-                {
-                    _currentFrame++;
-                    _wasStrike = true;
-                }
-                else
-                {
-                    _isSecondRoll = true;
-                    if (_wasSpare || _wasStrike)
-                        _bonusPerFrame[_currentFrame - 1] += pins;
-                }
+                _isSecondRoll = true;
+                if (_wasSpare || _wasStrike)
+                    _bonusPerFrame[_currentFrame - 1] += pins;
             }
         }
     }

@@ -30,6 +30,13 @@ namespace BowlingKata.Tests
         {
             Game game = new();
             Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(-1));
-        } 
+        }
+        
+        [Fact]
+        public void FailIfAttemptingToScoreMoreThanTenPins()
+        {
+            Game game = new();
+            Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(11));
+        }
     }
 }

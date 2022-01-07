@@ -16,6 +16,8 @@ namespace BowlingKata
         {
             if (pins is < 0 or > 10)
                 throw new ArgumentOutOfRangeException(nameof(pins));
+            if(pins +_pins > 10)
+                throw new ArgumentOutOfRangeException(nameof(pins));
             _pins += pins;
         }
     }

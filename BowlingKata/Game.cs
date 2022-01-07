@@ -14,9 +14,8 @@ namespace BowlingKata
 
         public void Roll(int pins)
         {
-            if (pins < 0)
+            if (pins < 0 || pins > 10)
                 throw new ArgumentOutOfRangeException(nameof(pins));
-            
             _pins = pins;
         }
     }

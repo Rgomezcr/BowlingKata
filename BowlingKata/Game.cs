@@ -25,7 +25,8 @@ namespace BowlingKata
                 throw new ArgumentOutOfRangeException(nameof(pins));
 
             AddScoreToCurrentFrame(pins);
-
+            if (_wasSpare || _wasStrike)
+                AddBonus(pins);
             if (IsFirstRoll && pins == 10)
             {
                 Strike(pins);
@@ -47,9 +48,6 @@ namespace BowlingKata
 
         private void SecondRoll(int pins)
         {
-            if (_wasStrike)
-                AddBonus(pins);
-
             _isSecondRoll = false;
             _wasStrike = false;
             _wasSpare = _scorePerFrame[_currentFrame] == 10;
@@ -59,8 +57,6 @@ namespace BowlingKata
         private void FirstRoll(int pins)
         {
             _isSecondRoll = true;
-            if (_wasSpare || _wasStrike)
-                AddBonus(pins);
         }
 
         private void AddBonus(int pins)
@@ -70,8 +66,7 @@ namespace BowlingKata
 
         private void Strike(int pins)
         {
-            if (_wasSpare || _wasStrike)
-                AddBonus(pins);
+            
             _currentFrame++;
             _wasStrike = true;
         }

@@ -12,6 +12,7 @@ namespace BowlingKata
         private int _currentFrame;
         private bool _isSecondRoll;
         private bool _wasStrike;
+        private bool _wasSpare;
 
         public int Score()
         {
@@ -27,12 +28,13 @@ namespace BowlingKata
 
             if (_isSecondRoll)
             {
-                if (_wasStrike && _currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
+                if (_wasStrike)
                     _bonusPerFrame[_currentFrame - 1] += pins;
-
-                _currentFrame++;
+                
                 _isSecondRoll = false;   
                 _wasStrike = false;
+                _wasSpare = _scorePerFrame[_currentFrame] == 10;
+                _currentFrame++;
             }
             else
             {
@@ -44,7 +46,7 @@ namespace BowlingKata
                 else
                 {
                     _isSecondRoll = true;
-                    if (_currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
+                    if (_wasSpare || _wasStrike)
                         _bonusPerFrame[_currentFrame - 1] += pins;
                 }
             }

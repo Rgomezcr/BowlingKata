@@ -60,5 +60,17 @@ namespace BowlingKata.Tests
             
             Assert.Throws<ArgumentOutOfRangeException>(() => game.Roll(9));
         }
+
+        [Fact]
+        public void ResetPinsWhenChangingFrame()
+        {
+            Game game = new();
+            
+            game.Roll(3);
+            game.Roll(6);
+            game.Roll(2);
+            
+            Assert.Equal(11, game.Score());
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace BowlingKata
             else
             {
                 _isSecondRoll = true;
+                if (_currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
+                    _scorePerFrame[_currentFrame - 1] += pins;
             }
         }
     }

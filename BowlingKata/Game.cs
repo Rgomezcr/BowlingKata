@@ -8,12 +8,14 @@ namespace BowlingKata
         private const int FramesPerGame = 10;
 
         private readonly int[] _scorePerFrame = new int[FramesPerGame];
+        private readonly int[] _bonusPerFrame = new int[FramesPerGame];
         private int _currentFrame;
         private bool _isSecondRoll;
+        private bool _wasStrike;
 
         public int Score()
         {
-            return _scorePerFrame.Sum();
+            return _scorePerFrame.Sum() + _bonusPerFrame.Sum();
         }
 
         public void Roll(int pins)
@@ -25,14 +27,26 @@ namespace BowlingKata
 
             if (_isSecondRoll)
             {
+                if (_wasStrike && _currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
+                    _bonusPerFrame[_currentFrame - 1] += pins;
+
                 _currentFrame++;
-                _isSecondRoll = false;
+                _isSecondRoll = false;   
+                _wasStrike = false;
             }
             else
             {
-                _isSecondRoll = true;
-                if (_currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
-                    _scorePerFrame[_currentFrame - 1] += pins;
+                if (pins == 10)
+                {
+                    _currentFrame++;
+                    _wasStrike = true;
+                }
+                else
+                {
+                    _isSecondRoll = true;
+                    if (_currentFrame > 0 && _scorePerFrame[_currentFrame - 1] == 10)
+                        _bonusPerFrame[_currentFrame - 1] += pins;
+                }
             }
         }
     }

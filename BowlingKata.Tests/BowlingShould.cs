@@ -72,5 +72,17 @@ namespace BowlingKata.Tests
             
             Assert.Equal(11, game.Score());
         }
+        
+        [Fact]
+        public void AddSpareBonusAsValueOfNextRoll()
+        {
+            Game game = new();
+            
+            game.Roll(3);
+            game.Roll(7);
+            game.Roll(5);
+            
+            Assert.Equal(20, game.Score());
+        }
     }
 }
